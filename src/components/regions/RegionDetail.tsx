@@ -35,14 +35,14 @@ const REGION_COLOR_MAP: Record<string, string> = {
   xishuangbanna: "bg-tea-green/10 text-tea-green border-tea-green/20 dark:bg-tea-green/20 dark:text-tea-green-light dark:border-tea-green/30",
   lincang: "bg-amber/10 text-amber border-amber/20 dark:bg-amber/20 dark:text-amber-light dark:border-amber/30",
   puer: "bg-cinnabar/10 text-cinnabar border-cinnabar/20 dark:bg-cinnabar/20 dark:text-cinnabar-light dark:border-cinnabar/30",
-  baoshan: "bg-tea-green-light/10 text-tea-green-light border-tea-green-light/20 dark:bg-tea-green-light/20 dark:text-tea-green-light dark:border-tea-green-light/30",
+  baoshan: "bg-indigo/10 text-indigo border-indigo/20 dark:bg-indigo/20 dark:text-indigo-light dark:border-indigo/30",
 };
 
 const REGION_DOT_MAP: Record<string, string> = {
   xishuangbanna: "bg-tea-green dark:bg-tea-green-light",
   lincang: "bg-amber dark:bg-amber-light",
   puer: "bg-cinnabar dark:bg-cinnabar-light",
-  baoshan: "bg-tea-green-light",
+  baoshan: "bg-indigo dark:bg-indigo-light",
 };
 
 const transition = { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] as const };

@@ -99,19 +99,19 @@
       "保山茶多用于拼配，亦有昌宁古树茶独立出品",
       "与滇西其他茶区风格相近，偏柔和"
     ],
-    "famousMountains": [],
+    "famousMountains": ["gao-li-gong-shan", "huang-jia-zhai"],
     "subRegions": [
       {
         "id": "changning",
         "name": "昌宁县",
-        "description": "保山茶主产区，有右甸、漭水等古茶山，茶树与核桃、玉米间作。昌宁茶多供下关等厂拼配。",
-        "famousMountains": []
+        "description": "保山茶主产区，漭水黄家寨古茶园被授予\"魅力古茶园\"称号，有近千年种茶历史。昌宁大叶种为地方性良种。",
+        "famousMountains": ["huang-jia-zhai"]
       },
       {
         "id": "tengchong",
         "name": "腾冲市",
-        "description": "高黎贡山茶区，生态优良，古茶树散布于山林。腾冲茶产量有限，多为地方消费。",
-        "famousMountains": []
+        "description": "高黎贡山茶区，原始森林中有4.7万亩野生茶树，古树茶产量极少，品质珍稀。民间称\"孔明茶\"。",
+        "famousMountains": ["gao-li-gong-shan"]
       }
     ]
   }

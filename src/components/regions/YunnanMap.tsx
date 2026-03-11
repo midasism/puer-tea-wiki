@@ -14,24 +14,24 @@ const GEO_URL = "/yunnan-geo.json";
 
 const TEA_REGION_COLORS: Record<string, { fill: string; hover: string; stroke: string }> = {
   xishuangbanna: {
-    fill: "rgba(45, 80, 22, 0.45)",
-    hover: "rgba(45, 80, 22, 0.65)",
-    stroke: "#2D5016",
+    fill: "rgba(22, 101, 52, 0.50)",
+    hover: "rgba(22, 101, 52, 0.70)",
+    stroke: "#15803d",
   },
   lincang: {
-    fill: "rgba(139, 105, 20, 0.40)",
-    hover: "rgba(139, 105, 20, 0.60)",
-    stroke: "#8B6914",
+    fill: "rgba(180, 120, 20, 0.50)",
+    hover: "rgba(180, 120, 20, 0.70)",
+    stroke: "#a16207",
   },
   puer: {
-    fill: "rgba(196, 69, 28, 0.35)",
-    hover: "rgba(196, 69, 28, 0.55)",
-    stroke: "#C4451C",
+    fill: "rgba(190, 50, 30, 0.45)",
+    hover: "rgba(190, 50, 30, 0.65)",
+    stroke: "#b91c1c",
   },
   baoshan: {
-    fill: "rgba(74, 122, 46, 0.35)",
-    hover: "rgba(74, 122, 46, 0.55)",
-    stroke: "#4A7A2E",
+    fill: "rgba(37, 99, 165, 0.45)",
+    hover: "rgba(37, 99, 165, 0.65)",
+    stroke: "#1d4ed8",
   },
 };
 
@@ -303,9 +303,9 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
                           style={{
                             default: {
                               outline: "none",
-                              strokeDasharray: "8 4",
-                              animation: "dash-flow 1.5s linear infinite",
-                              filter: `drop-shadow(0 0 3px ${colors.stroke}80)`,
+                              strokeDasharray: "12 6",
+                              animation: "dash-flow 4s linear infinite",
+                              filter: `drop-shadow(0 0 4px ${colors.stroke}60)`,
                               pointerEvents: "none" as const,
                             },
                             hover: { outline: "none", pointerEvents: "none" as const },

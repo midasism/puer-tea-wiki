@@ -11,6 +11,8 @@
   --color-paper-dark: #E8E0D0;
   --color-cinnabar: #C4451C;
   --color-cinnabar-light: #E05A30;
+  --color-indigo: #1d4ed8;
+  --color-indigo-light: #3b82f6;
   --color-ink: #1A1A1A;
   --color-ink-light: #3A3A3A;
   --color-ink-muted: #6B6B6B;
@@ -32,6 +34,8 @@
   --color-paper-dark: var(--color-paper-dark);
   --color-cinnabar: var(--color-cinnabar);
   --color-cinnabar-light: var(--color-cinnabar-light);
+  --color-indigo: var(--color-indigo);
+  --color-indigo-light: var(--color-indigo-light);
   --color-ink: var(--color-ink);
   --color-ink-light: var(--color-ink-light);
   --color-ink-muted: var(--color-ink-muted);
@@ -103,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes dash-flow {
-  to { stroke-dashoffset: -24; }
+  to { stroke-dashoffset: -36; }
 }
 
 .scrollbar-hide {

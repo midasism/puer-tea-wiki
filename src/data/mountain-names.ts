@@ -18,4 +18,6 @@ export const MOUNTAIN_NAMES: Record<string, string> = {
   "da-xue-shan": "大雪山",
   "jing-mai": "景迈山",
   "kun-lu-shan": "困鹿山",
+  "gao-li-gong-shan": "高黎贡山",
+  "huang-jia-zhai": "漭水黄家寨",
 };
