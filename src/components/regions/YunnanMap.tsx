@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -35,15 +35,28 @@ const TEA_REGION_COLORS: Record<string, { fill: string; hover: string; stroke: s
   },
 };
 
-const TEA_REGION_LABELS: Record<string, { name: string; coordinates: [number, number] }> = {
-  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75] },
-  lincang: { name: "临沧", coordinates: [99.9, 23.88] },
-  puer: { name: "普洱", coordinates: [100.95, 23.05] },
-  baoshan: { name: "保山", coordinates: [99.15, 25.1] },
+interface RegionViewport {
+  name: string;
+  coordinates: [number, number];
+  zoom: number;
+}
+
+const DEFAULT_CENTER: [number, number] = [100.5, 24.2];
+const DEFAULT_ZOOM = 1;
+
+const TEA_REGION_VIEWPORTS: Record<string, RegionViewport> = {
+  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75], zoom: 2.4 },
+  lincang: { name: "临沧", coordinates: [99.9, 23.88], zoom: 2.6 },
+  puer: { name: "普洱", coordinates: [100.95, 23.05], zoom: 2.0 },
+  baoshan: { name: "保山", coordinates: [99.15, 25.1], zoom: 2.6 },
 };
 
+const TRANSLATE_EXTENT: [[number, number], [number, number]] = [
+  [-60, -60],
+  [560, 540],
+];
+
 const NON_TEA_FILL = "rgba(200, 195, 185, 0.15)";
-const NON_TEA_FILL_DARK = "rgba(80, 75, 65, 0.20)";
 const NON_TEA_STROKE = "rgba(160, 155, 145, 0.35)";
 
 interface YunnanMapProps {
@@ -58,6 +71,33 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
     x: number;
     y: number;
   } | null>(null);
+
+  const [mapCenter, setMapCenter] = useState<[number, number]>(DEFAULT_CENTER);
+  const [mapZoom, setMapZoom] = useState(DEFAULT_ZOOM);
+
+  const prevSelectedRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (selectedRegionId === prevSelectedRef.current) return;
+    prevSelectedRef.current = selectedRegionId;
+
+    if (selectedRegionId && TEA_REGION_VIEWPORTS[selectedRegionId]) {
+      const vp = TEA_REGION_VIEWPORTS[selectedRegionId];
+      setMapCenter(vp.coordinates);
+      setMapZoom(vp.zoom);
+    } else if (!selectedRegionId) {
+      setMapCenter(DEFAULT_CENTER);
+      setMapZoom(DEFAULT_ZOOM);
+    }
+  }, [selectedRegionId]);
+
+  const handleMoveEnd = useCallback(
+    (position: { coordinates: [number, number]; zoom: number }) => {
+      setMapCenter(position.coordinates);
+      setMapZoom(position.zoom);
+    },
+    []
+  );
 
   const handleMouseMove = useCallback(
     (name: string, regionId: string | null) => (evt: React.MouseEvent) => {
@@ -80,57 +120,76 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
     setTooltipInfo(null);
   }, []);
 
-  const projection = useMemo(
-    () =>
-      ({
-        rotate: [-100.5, 0, 0] as [number, number, number],
-        center: [0, 24.2] as [number, number],
-        scale: 3800,
-      }),
-    []
-  );
+  const handleResetView = useCallback(() => {
+    setMapCenter(DEFAULT_CENTER);
+    setMapZoom(DEFAULT_ZOOM);
+  }, []);
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl border border-ink-muted/10 bg-gradient-to-br from-paper via-paper to-paper-dark/50 shadow-sm dark:border-ink-muted/15 dark:from-paper-dark dark:via-paper-dark dark:to-ink/20">
       {/* Map title overlay */}
-      <div className="absolute left-4 top-4 z-10 select-none">
+      <div className="absolute left-4 top-4 z-10 flex items-center gap-3 select-none">
         <div className="font-serif text-xs tracking-widest text-ink-muted/60 dark:text-ink-muted/50">
           YUNNAN · 云南
         </div>
+        {mapZoom > 1.2 && (
+          <button
+            type="button"
+            onClick={handleResetView}
+            className="rounded-md bg-paper/80 px-2 py-0.5 font-sans text-[10px] text-ink-muted shadow-sm transition-colors hover:bg-paper hover:text-ink dark:bg-paper-dark/80 dark:hover:bg-paper-dark"
+          >
+            复位
+          </button>
+        )}
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-10 flex flex-col gap-1.5">
-        {Object.entries(TEA_REGION_LABELS).map(([id, { name }]) => {
+      <div className="absolute bottom-4 left-4 z-10 flex flex-col gap-1">
+        {Object.entries(TEA_REGION_VIEWPORTS).map(([id, { name }]) => {
           const colors = TEA_REGION_COLORS[id];
-          const isActive = selectedRegionId === id || hoveredRegion === id;
+          const isActive = selectedRegionId === id;
+          const isHover = hoveredRegion === id;
           return (
             <button
               key={id}
               type="button"
               onClick={() => onSelectRegion(id)}
-              className={`flex items-center gap-2 rounded-md px-2.5 py-1 text-left transition-all duration-200 ${
+              className={`flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-left transition-all duration-200 ${
                 isActive
-                  ? "bg-paper/90 shadow-sm dark:bg-paper-dark/90"
-                  : "bg-transparent hover:bg-paper/60 dark:hover:bg-paper-dark/60"
+                  ? "bg-paper/95 shadow-md ring-1 dark:bg-paper-dark/95"
+                  : isHover
+                    ? "bg-paper/80 shadow-sm dark:bg-paper-dark/80"
+                    : "bg-paper/40 hover:bg-paper/70 dark:bg-paper-dark/40 dark:hover:bg-paper-dark/70"
               }`}
+              style={{
+                boxShadow: isActive
+                  ? `0 0 0 1px ${colors.stroke}30, 0 1px 3px rgba(0,0,0,0.08)`
+                  : undefined,
+              }}
             >
               <span
-                className="h-2.5 w-2.5 rounded-full"
+                className="h-2.5 w-2.5 rounded-full transition-transform duration-200"
                 style={{
                   backgroundColor: colors.stroke,
-                  boxShadow: `0 0 0 1px ${colors.stroke}40 inset`,
+                  transform: isActive ? "scale(1.3)" : "scale(1)",
+                  boxShadow: isActive ? `0 0 6px ${colors.stroke}60` : "none",
                 }}
               />
               <span
                 className={`font-sans text-xs transition-colors ${
                   isActive
-                    ? "font-medium text-ink dark:text-foreground"
+                    ? "font-semibold text-ink dark:text-foreground"
                     : "text-ink-muted dark:text-ink-muted"
                 }`}
               >
                 {name}
               </span>
+              {isActive && (
+                <span
+                  className="ml-auto h-1 w-1 rounded-full animate-pulse"
+                  style={{ backgroundColor: colors.stroke }}
+                />
+              )}
             </button>
           );
         })}
@@ -161,12 +220,23 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
 
       <ComposableMap
         projection="geoMercator"
-        projectionConfig={projection}
+        projectionConfig={{
+          rotate: [-100.5, 0, 0] as [number, number, number],
+          center: [0, 24.2] as [number, number],
+          scale: 3800,
+        }}
         width={500}
         height={480}
         style={{ width: "100%", height: "auto" }}
       >
-        <ZoomableGroup center={[100.5, 24.2]} zoom={1} minZoom={0.8} maxZoom={3}>
+        <ZoomableGroup
+          center={mapCenter}
+          zoom={mapZoom}
+          minZoom={0.9}
+          maxZoom={4}
+          translateExtent={TRANSLATE_EXTENT}
+          onMoveEnd={handleMoveEnd}
+        >
           <Geographies geography={GEO_URL}>
             {({ geographies }) =>
               geographies.map((geo) => {
@@ -217,7 +287,7 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
           </Geographies>
 
           {/* Region name labels */}
-          {Object.entries(TEA_REGION_LABELS).map(([id, { name, coordinates }]) => {
+          {Object.entries(TEA_REGION_VIEWPORTS).map(([id, { name, coordinates }]) => {
             const isActive = selectedRegionId === id || hoveredRegion === id;
             return (
               <Marker key={id} coordinates={coordinates}>
@@ -243,7 +313,7 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
           })}
 
           {/* Pulsing dots for tea regions */}
-          {Object.entries(TEA_REGION_LABELS).map(([id, { coordinates }]) => {
+          {Object.entries(TEA_REGION_VIEWPORTS).map(([id, { coordinates }]) => {
             const isActive = selectedRegionId === id;
             const colors = TEA_REGION_COLORS[id];
             return (
