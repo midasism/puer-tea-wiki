@@ -45,10 +45,10 @@ const DEFAULT_CENTER: [number, number] = [100.5, 24.2];
 const DEFAULT_ZOOM = 1;
 
 const TEA_REGION_VIEWPORTS: Record<string, RegionViewport> = {
-  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75], zoom: 2.4 },
-  lincang: { name: "临沧", coordinates: [99.9, 23.88], zoom: 2.6 },
-  puer: { name: "普洱", coordinates: [100.95, 23.05], zoom: 2.0 },
-  baoshan: { name: "保山", coordinates: [99.15, 25.1], zoom: 2.6 },
+  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75], zoom: 1.7 },
+  lincang: { name: "临沧", coordinates: [99.9, 23.88], zoom: 1.8 },
+  puer: { name: "普洱", coordinates: [100.95, 23.05], zoom: 1.5 },
+  baoshan: { name: "保山", coordinates: [99.15, 25.1], zoom: 1.8 },
 };
 
 const TRANSLATE_EXTENT: [[number, number], [number, number]] = [
@@ -238,52 +238,84 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
           onMoveEnd={handleMoveEnd}
         >
           <Geographies geography={GEO_URL}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const { teaRegion, isTeaRegion, name } = geo.properties;
-                const isSelected = selectedRegionId === teaRegion;
-                const isHovered = hoveredRegion === teaRegion;
-                const colors = teaRegion ? TEA_REGION_COLORS[teaRegion] : null;
+            {({ geographies }) => (
+              <>
+                {geographies.map((geo) => {
+                  const { teaRegion, isTeaRegion, name } = geo.properties;
+                  const isSelected = selectedRegionId === teaRegion;
+                  const isHovered = hoveredRegion === teaRegion;
+                  const colors = teaRegion ? TEA_REGION_COLORS[teaRegion] : null;
 
-                let fill = NON_TEA_FILL;
-                let stroke = NON_TEA_STROKE;
-                let strokeWidth = 0.5;
+                  let fill = NON_TEA_FILL;
+                  let stroke = NON_TEA_STROKE;
+                  let strokeWidth = 0.5;
 
-                if (isTeaRegion && colors) {
-                  fill = isSelected || isHovered ? colors.hover : colors.fill;
-                  stroke = colors.stroke;
-                  strokeWidth = isSelected ? 1.8 : isHovered ? 1.2 : 0.8;
-                }
+                  if (isTeaRegion && colors) {
+                    fill = isSelected || isHovered ? colors.hover : colors.fill;
+                    stroke = colors.stroke;
+                    strokeWidth = isSelected ? 1.8 : isHovered ? 1.2 : 0.8;
+                  }
 
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={fill}
-                    stroke={stroke}
-                    strokeWidth={strokeWidth}
-                    strokeLinejoin="round"
-                    style={{
-                      default: { outline: "none", transition: "all 0.25s ease" },
-                      hover: {
-                        outline: "none",
-                        fill: isTeaRegion && colors ? colors.hover : NON_TEA_FILL,
-                        cursor: isTeaRegion ? "pointer" : "default",
-                      },
-                      pressed: { outline: "none" },
-                    }}
-                    onMouseEnter={() => {
-                      if (isTeaRegion) setHoveredRegion(teaRegion);
-                    }}
-                    onMouseMove={handleMouseMove(name, teaRegion)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => {
-                      if (isTeaRegion) onSelectRegion(teaRegion);
-                    }}
-                  />
-                );
-              })
-            }
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={fill}
+                      stroke={stroke}
+                      strokeWidth={strokeWidth}
+                      strokeLinejoin="round"
+                      style={{
+                        default: { outline: "none", transition: "all 0.25s ease" },
+                        hover: {
+                          outline: "none",
+                          fill: isTeaRegion && colors ? colors.hover : NON_TEA_FILL,
+                          cursor: isTeaRegion ? "pointer" : "default",
+                        },
+                        pressed: { outline: "none" },
+                      }}
+                      onMouseEnter={() => {
+                        if (isTeaRegion) setHoveredRegion(teaRegion);
+                      }}
+                      onMouseMove={handleMouseMove(name, teaRegion)}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => {
+                        if (isTeaRegion) onSelectRegion(teaRegion);
+                      }}
+                    />
+                  );
+                })}
+
+                {/* Animated highlight border for selected region */}
+                {selectedRegionId &&
+                  geographies
+                    .filter((geo) => geo.properties.teaRegion === selectedRegionId)
+                    .map((geo) => {
+                      const colors = TEA_REGION_COLORS[selectedRegionId];
+                      return (
+                        <Geography
+                          key={`highlight-${geo.rsmKey}`}
+                          geography={geo}
+                          fill="none"
+                          stroke={colors.stroke}
+                          strokeWidth={2.5}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          style={{
+                            default: {
+                              outline: "none",
+                              strokeDasharray: "8 4",
+                              animation: "dash-flow 1.5s linear infinite",
+                              filter: `drop-shadow(0 0 3px ${colors.stroke}80)`,
+                              pointerEvents: "none" as const,
+                            },
+                            hover: { outline: "none", pointerEvents: "none" as const },
+                            pressed: { outline: "none", pointerEvents: "none" as const },
+                          }}
+                        />
+                      );
+                    })}
+              </>
+            )}
           </Geographies>
 
           {/* Region name labels */}

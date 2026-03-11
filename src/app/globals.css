@@ -102,6 +102,10 @@ h1, h2, h3, h4, h5, h6 {
   animation: ink-spread 1.5s ease-out forwards;
 }
 
+@keyframes dash-flow {
+  to { stroke-dashoffset: -24; }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

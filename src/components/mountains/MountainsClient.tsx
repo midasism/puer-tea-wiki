@@ -83,27 +83,28 @@ export function MountainsClient({ mountains }: MountainsClientProps) {
         </div>
       </div>
 
-      {/* Grid */}
-      <motion.div
-        layout
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        <AnimatePresence mode="popLayout">
-          {filteredMountains.map((mountain) => (
+      {/* Grid — key forces full remount on filter change to avoid stale AnimatePresence state */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`${regionFilter}|${flavorFilter}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {filteredMountains.map((mountain, i) => (
             <motion.div
               key={mountain.id}
-              layout
-              layoutId={mountain.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.03 }}
             >
               <MountainCard mountain={mountain} />
             </motion.div>
           ))}
-        </AnimatePresence>
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
