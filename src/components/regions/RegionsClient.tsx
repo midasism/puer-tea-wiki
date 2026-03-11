@@ -1,8 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { YunnanMap } from "./YunnanMap";
+import dynamic from "next/dynamic";
 import { RegionDetail, type Region } from "./RegionDetail";
+
+const YunnanMap = dynamic(
+  () => import("./YunnanMap").then((mod) => ({ default: mod.YunnanMap })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex aspect-square w-full items-center justify-center rounded-2xl border border-ink-muted/10 bg-paper-dark/30">
+        <div className="font-sans text-sm text-ink-muted">地图加载中...</div>
+      </div>
+    ),
+  }
+);
 
 interface RegionsClientProps {
   regions: Region[];
@@ -15,21 +27,23 @@ export function RegionsClient({ regions }: RegionsClientProps) {
     ? regions.find((r) => r.id === selectedRegionId) ?? null
     : null;
 
-  const handleBackToOverview = () => setSelectedRegionId(null);
-
   return (
-    <div className="mt-10 grid gap-8 lg:grid-cols-[1fr,1fr] lg:gap-10 xl:grid-cols-[minmax(0,1.2fr),minmax(0,1fr)]">
-      <div className="order-2 lg:order-1">
+    <div className="mt-10 grid gap-8 lg:grid-cols-[1.15fr,1fr] lg:gap-10">
+      <div className="order-1">
         <YunnanMap
           selectedRegionId={selectedRegionId}
           onSelectRegion={(id) => setSelectedRegionId(id)}
         />
+        <p className="mt-3 text-center font-sans text-xs text-ink-muted/60 dark:text-ink-muted/50">
+          支持缩放和拖拽 · 点击彩色区域查看产区详情
+        </p>
       </div>
-      <div className="order-1 lg:order-2">
+      <div className="order-2">
         <RegionDetail
           region={selectedRegion}
           allRegions={regions}
-          onBackToOverview={handleBackToOverview}
+          onSelectRegion={(id) => setSelectedRegionId(id)}
+          onBackToOverview={() => setSelectedRegionId(null)}
         />
       </div>
     </div>
