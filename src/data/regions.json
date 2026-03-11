@@ -1,0 +1,118 @@
+[
+  {
+    "id": "xishuangbanna",
+    "name": "西双版纳",
+    "description": "西双版纳傣族自治州位于云南省最南端，北回归线以南，是普洱茶的核心产区与发祥地。境内有古六大茶山（易武、倚邦、攸乐、莽枝、革登、蛮砖）和新六大茶山（南糯、布朗、巴达、勐宋、景迈、南峤），茶文化底蕴深厚，历史上曾为贡茶主产地。",
+    "altitude": "550-2429米",
+    "climate": "热带季风气候，年均温18-22℃，年降雨量1200-1800毫米，冬无严寒、夏无酷暑，雨热同季",
+    "area": "约1.9万平方公里，茶园面积约140万亩",
+    "features": [
+      "普洱茶发源地，古六大茶山所在地",
+      "勐海、勐腊两县为产茶重镇",
+      "布朗山老班章、易武七村八寨享誉中外",
+      "茶树品种以勐海大叶种、易武绿芽茶为主"
+    ],
+    "famousMountains": ["lao-ban-zhang", "xin-ban-zhang", "lao-man-e", "yi-wu", "gua-feng-zhai", "bo-he-tang", "wan-gong", "nan-nuo-shan", "he-kai", "na-ka", "man-song", "tong-qing-he"],
+    "subRegions": [
+      {
+        "id": "menghai",
+        "name": "勐海县",
+        "description": "西双版纳产茶第一大县，布朗山、南糯山、贺开、那卡等名山均属勐海。勐海大叶种发源地，勐海茶厂所在地。",
+        "famousMountains": ["lao-ban-zhang", "xin-ban-zhang", "lao-man-e", "nan-nuo-shan", "he-kai", "na-ka"]
+      },
+      {
+        "id": "mengla",
+        "name": "勐腊县",
+        "description": "古六大茶山主体所在地，易武、倚邦、曼松等历史名山分布于此。易武为百年贡茶之乡，柔滑甜润的茶风闻名。",
+        "famousMountains": ["yi-wu", "gua-feng-zhai", "bo-he-tang", "wan-gong", "man-song", "tong-qing-he"]
+      }
+    ]
+  },
+  {
+    "id": "lincang",
+    "name": "临沧",
+    "description": "临沧市位于云南省西南部，澜沧江与怒江之间，是世界茶树起源核心地带。境内有勐库大雪山万亩古茶树群、凤庆香竹箐3200年茶王树。冰岛、昔归、小户赛、大雪山等名山茶价高昂，临沧茶以甜润、花果香著称。",
+    "altitude": "450-3504米",
+    "climate": "低纬高原季风气候，立体气候明显，年均温17℃左右，年降雨量900-1600毫米",
+    "area": "约2.4万平方公里，茶园面积约170万亩",
+    "features": [
+      "世界茶树起源地，有迄今发现的最大最老栽培型古茶树",
+      "勐库大叶种、凤庆大叶种为国家级良种",
+      "冰岛五寨、昔归等为顶级名山",
+      "茶汤以甜润、香气高扬见长"
+    ],
+    "famousMountains": ["bing-dao", "xi-gui", "xiao-hu-sai", "da-xue-shan"],
+    "subRegions": [
+      {
+        "id": "shuangjiang",
+        "name": "双江县",
+        "description": "勐库镇所在地，冰岛五寨、小户赛、大雪山均位于此。勐库大叶种原产地，古茶树资源富集。",
+        "famousMountains": ["bing-dao", "xiao-hu-sai", "da-xue-shan"]
+      },
+      {
+        "id": "bangdong",
+        "name": "邦东乡",
+        "description": "昔归茶产地，地处澜沧江畔，云遮雾绕，茶树与岩石共生，昔归以\"柳叶形\"和柔滑喉韵著称。",
+        "famousMountains": ["xi-gui"]
+      }
+    ]
+  },
+  {
+    "id": "puer",
+    "name": "普洱（思茅）",
+    "description": "普洱市原名思茅，2007年更名。普洱一词既指地名也指茶名，历史上普洱茶集散于此。景迈山千年万亩古茶林于2023年列入世界遗产，困鹿山为清代皇家贡茶园，无量山、哀牢山茶区生态优良。",
+    "altitude": "317-3370米",
+    "climate": "亚热带季风气候，年均温15-20℃，年降雨量1000-2700毫米，立体气候显著",
+    "area": "约4.5万平方公里，茶园面积约300万亩",
+    "features": [
+      "普洱茶因普洱府得名，历史文化深厚",
+      "景迈山古茶林为世界文化遗产",
+      "困鹿山曾为清廷贡茶园",
+      "茶树与森林混生，生态有机"
+    ],
+    "famousMountains": ["jing-mai", "kun-lu-shan"],
+    "subRegions": [
+      {
+        "id": "lancang",
+        "name": "澜沧县",
+        "description": "景迈山所在地，千年万亩古茶林与布朗族、傣族村寨共生，茶林文化景观独特，2023年入选世界遗产。",
+        "famousMountains": ["jing-mai"]
+      },
+      {
+        "id": "ninger",
+        "name": "宁洱县",
+        "description": "困鹿山所在地，清代贡茶园遗址。困鹿山茶以细叶著称，甜润高雅，产量稀少。",
+        "famousMountains": ["kun-lu-shan"]
+      }
+    ]
+  },
+  {
+    "id": "baoshan",
+    "name": "保山",
+    "description": "保山市位于云南省西部，怒江穿境而过。昌宁、腾冲等地有古茶树分布，昌宁红茶、保山小粒咖啡与普洱茶并列为当地特色农产品。保山茶区规模较西双版纳、临沧、普洱小，但历史悠久，有高黎贡山等生态茶区。",
+    "altitude": "535-3780米",
+    "climate": "低纬山地季风气候，垂直差异大，昌宁等地年降雨量约1200毫米",
+    "area": "约1.9万平方公里，茶园面积约70万亩",
+    "features": [
+      "昌宁为云南四大茶区之一，茶史可追溯至唐代",
+      "腾冲高黎贡山茶区生态原始",
+      "保山茶多用于拼配，亦有昌宁古树茶独立出品",
+      "与滇西其他茶区风格相近，偏柔和"
+    ],
+    "famousMountains": [],
+    "subRegions": [
+      {
+        "id": "changning",
+        "name": "昌宁县",
+        "description": "保山茶主产区，有右甸、漭水等古茶山，茶树与核桃、玉米间作。昌宁茶多供下关等厂拼配。",
+        "famousMountains": []
+      },
+      {
+        "id": "tengchong",
+        "name": "腾冲市",
+        "description": "高黎贡山茶区，生态优良，古茶树散布于山林。腾冲茶产量有限，多为地方消费。",
+        "famousMountains": []
+      }
+    ]
+  }
+]

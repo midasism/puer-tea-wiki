@@ -1,0 +1,21 @@
+// Mountain ID to display name mapping for region detail links
+export const MOUNTAIN_NAMES: Record<string, string> = {
+  "lao-ban-zhang": "老班章",
+  "xin-ban-zhang": "新班章",
+  "lao-man-e": "老曼峨",
+  "yi-wu": "易武",
+  "gua-feng-zhai": "刮风寨",
+  "bo-he-tang": "薄荷塘",
+  "wan-gong": "弯弓",
+  "nan-nuo-shan": "南糯山",
+  "he-kai": "贺开",
+  "na-ka": "那卡",
+  "man-song": "曼松",
+  "tong-qing-he": "铜箐河",
+  "bing-dao": "冰岛老寨",
+  "xi-gui": "昔归",
+  "xiao-hu-sai": "小户赛",
+  "da-xue-shan": "大雪山",
+  "jing-mai": "景迈山",
+  "kun-lu-shan": "困鹿山",
+};
