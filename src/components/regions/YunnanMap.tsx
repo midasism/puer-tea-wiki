@@ -10,7 +10,7 @@ import {
 } from "react-simple-maps";
 import { motion, AnimatePresence } from "framer-motion";
 
-const GEO_URL = "/yunnan-geo.json";
+const GEO_URL = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/yunnan-geo.json`;
 
 const TEA_REGION_COLORS: Record<string, { fill: string; hover: string; stroke: string }> = {
   xishuangbanna: {
