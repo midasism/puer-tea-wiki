@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
 
           <nav className="flex flex-col gap-2">
-            <span className="text-[0.6rem] font-medium uppercase tracking-[0.35em]" style={{ color: navLabelColor }}>
+            <span className="text-[0.6rem] font-medium uppercase tracking-[0.35em] md:text-[0.68rem]" style={{ color: navLabelColor }}>
               导航
             </span>
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
@@ -68,10 +68,10 @@ export default function Footer() {
         <div className="mt-10 h-px" style={{ background: dividerBg }} />
 
         <div className="mt-6 text-center">
-          <p className="text-[0.7rem] tracking-[0.12em]" style={{ fontFamily: "var(--font-serif), serif", color: disclaimerColor }}>
+          <p className="text-[0.7rem] tracking-[0.12em] md:text-[0.78rem]" style={{ fontFamily: "var(--font-serif), serif", color: disclaimerColor }}>
             数据仅供参考，不作为商业或专业决策依据。
           </p>
-          <p className="mt-2 text-[0.7rem] tracking-[0.12em]" style={{ fontFamily: "var(--font-serif), serif", color: copyrightColor }}>
+          <p className="mt-2 text-[0.7rem] tracking-[0.12em] md:text-[0.78rem]" style={{ fontFamily: "var(--font-serif), serif", color: copyrightColor }}>
             &copy; {new Date().getFullYear()} 普洱茶志 &middot; 云南普洱茶科普百科
           </p>
         </div>

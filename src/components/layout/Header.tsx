@@ -16,7 +16,8 @@ const navLinks = [
   { href: "/about", label: "关于" },
 ];
 
-const darkPages = new Set(["/", "/mountains"]);
+const darkPages = new Set(["/"]);
+const heroPages = new Set(["/history", "/glossary", "/regions", "/mountains", "/about"]);
 
 export default function Header() {
   const pathname = usePathname();
@@ -27,7 +28,9 @@ export default function Header() {
   const heroMode = isHomePage && !scrolled;
   const isDark = resolvedTheme === "dark";
   const isOnDarkPage = darkPages.has(pathname);
-  const usesDarkNav = isDark || isOnDarkPage || heroMode;
+  const isOnHeroPage = heroPages.has(pathname);
+  const heroPageDarkNav = isOnHeroPage && !scrolled;
+  const usesDarkNav = isDark || isOnDarkPage || heroMode || heroPageDarkNav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -41,12 +44,13 @@ export default function Header() {
 
   const navBg = (() => {
     if (heroMode) return "linear-gradient(to bottom, rgba(18,12,8,0.9) 0%, transparent 100%)";
+    if (heroPageDarkNav) return "linear-gradient(to bottom, rgba(18,12,8,0.85) 0%, transparent 100%)";
     if (usesDarkNav) return scrolled ? "rgba(18,12,8,0.92)" : "rgba(18,12,8,0.85)";
     return scrolled ? "rgba(250,245,236,0.95)" : "rgba(250,245,236,0.88)";
   })();
 
   const borderColor = (() => {
-    if (!scrolled || heroMode) return "1px solid transparent";
+    if (!scrolled || heroMode || heroPageDarkNav) return "1px solid transparent";
     return usesDarkNav ? "1px solid rgba(201,160,82,0.1)" : "1px solid rgba(107,66,38,0.1)";
   })();
 
@@ -68,7 +72,7 @@ export default function Header() {
           height: 64,
           padding: "0 48px",
           background: navBg,
-          backdropFilter: heroMode ? undefined : "blur(16px)",
+          backdropFilter: (heroMode || heroPageDarkNav) ? undefined : "blur(16px)",
           borderBottom: borderColor,
         }}
       >

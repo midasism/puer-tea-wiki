@@ -15,7 +15,7 @@ export default function AboutPage() {
           茶
         </div>
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
-          <div className="mb-3 flex items-center gap-2.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a052]">
+          <div className="mb-3 flex items-center gap-2.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a052] md:text-[0.75rem]">
             <span className="h-px w-8 bg-[#c9a052]/40" />
             ABOUT
           </div>

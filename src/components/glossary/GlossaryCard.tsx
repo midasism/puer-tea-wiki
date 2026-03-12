@@ -97,7 +97,7 @@ export function GlossaryCard({ item, glossaryMap }: GlossaryCardProps) {
         aria-expanded={expanded}
       >
         <div className="p-5">
-          <div className="mb-2 text-[0.6rem] uppercase tracking-[0.15em]" style={{ color: metaColor }}>
+          <div className="mb-2 text-[0.6rem] uppercase tracking-[0.15em] md:text-[0.68rem]" style={{ color: metaColor }}>
             TERM / {CATEGORY_LABELS[item.category]}
           </div>
           <div className="flex items-start justify-between gap-3">
@@ -108,7 +108,7 @@ export function GlossaryCard({ item, glossaryMap }: GlossaryCardProps) {
               <p className="mt-1.5 text-[0.78rem] leading-relaxed line-clamp-2" style={{ fontFamily: "var(--font-serif), serif", color: briefColor }}>
                 {item.brief}
               </p>
-              <span className="mt-3 inline-block rounded-sm px-2 py-0.5 text-[0.62rem]" style={{ background: tagStyle.bg, color: tagStyle.color }}>
+              <span className="mt-3 inline-block rounded-sm px-2 py-0.5 text-[0.62rem] md:text-[0.7rem]" style={{ background: tagStyle.bg, color: tagStyle.color }}>
                 {CATEGORY_LABELS[item.category]}
               </span>
             </div>
@@ -137,7 +137,7 @@ export function GlossaryCard({ item, glossaryMap }: GlossaryCardProps) {
               </p>
               {relatedItems.length > 0 && (
                 <div className="mt-4">
-                  <p className="mb-2 text-[0.65rem] uppercase tracking-[0.18em]" style={{ color: relatedLabelColor }}>
+                  <p className="mb-2 text-[0.65rem] uppercase tracking-[0.18em] md:text-[0.72rem]" style={{ color: relatedLabelColor }}>
                     关联名词
                   </p>
                   <div className="flex flex-wrap gap-2">

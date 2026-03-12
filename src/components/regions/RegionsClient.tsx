@@ -39,7 +39,7 @@ export function RegionsClient({ regions }: RegionsClientProps) {
           selectedRegionId={selectedRegionId}
           onSelectRegion={(id) => setSelectedRegionId(id)}
         />
-        <p className="mt-3 text-center text-[0.72rem]" style={{ color: hintColor }}>
+        <p className="mt-3 text-center text-[0.72rem] md:text-[0.78rem]" style={{ color: hintColor }}>
           支持缩放和拖拽 · 点击彩色区域查看产区详情
         </p>
       </div>

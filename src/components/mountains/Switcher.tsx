@@ -49,7 +49,7 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
               <circle cx="11" cy="10" r="2.5" fill="#c47ae8" opacity=".8" />
             </svg>
             <span
-              className="text-[0.72rem] tracking-[0.1em]"
+              className="text-[0.72rem] tracking-[0.1em] md:text-[0.78rem]"
               style={{ fontFamily: "var(--font-mono, monospace)", color: view === "A" ? tabActiveText : tabInactiveText }}
             >
               风味星云
@@ -66,7 +66,7 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
               <path d="M0,14 C2,8 4,10 6,6 C8,2 10,5 14,4 L14,14 Z" fill="rgba(45,74,45,.6)" />
             </svg>
             <span
-              className="text-[0.72rem] tracking-[0.1em]"
+              className="text-[0.72rem] tracking-[0.1em] md:text-[0.78rem]"
               style={{ fontFamily: "var(--font-mono, monospace)", color: view === "B" ? tabActiveText : tabInactiveText }}
             >
               山峦剖面
@@ -74,7 +74,7 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
           </button>
         </div>
 
-        <span className="text-[0.66rem] tracking-[0.15em]" style={{ fontFamily: "var(--font-mono, monospace)", color: countColor }}>
+        <span className="text-[0.66rem] tracking-[0.15em] md:text-[0.72rem]" style={{ fontFamily: "var(--font-mono, monospace)", color: countColor }}>
           {count} 座山头
         </span>
 
@@ -90,6 +90,7 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
                 key={type}
                 type="button"
                 title={type}
+                aria-label={`筛选${type}`}
                 onClick={() => onFilterToggle(type)}
                 className="rounded-full transition-all"
                 style={{
@@ -102,7 +103,7 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
               />
             );
           })}
-          <span className="hidden text-[0.62rem] sm:inline" style={{ fontFamily: "var(--font-mono, monospace)", color: hintColor }}>
+          <span className="hidden text-[0.62rem] sm:inline md:text-[0.7rem]" style={{ fontFamily: "var(--font-mono, monospace)", color: hintColor }}>
             筛选风味
           </span>
         </div>

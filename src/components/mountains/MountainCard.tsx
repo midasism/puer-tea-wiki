@@ -64,7 +64,7 @@ export function MountainCard({ mountain }: MountainCardProps) {
             <div className="min-w-0 flex-1">
               <div className="mb-1 flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: regionDotColor }} />
-                <span className="text-[0.6rem] tracking-wider" style={{ color: regionTextColor }}>{regionName}</span>
+                <span className="text-[0.6rem] tracking-wider md:text-[0.68rem]" style={{ color: regionTextColor }}>{regionName}</span>
               </div>
               <h3 className="text-[1.2rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.04em", color: nameColor }}>
                 {mountain.name}
@@ -78,7 +78,7 @@ export function MountainCard({ mountain }: MountainCardProps) {
           </p>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="rounded-sm px-2 py-0.5 text-[0.62rem]" style={{ background: tagBg, border: `1px solid ${tagBorder}`, color: tagColor }}>
+            <span className="rounded-sm px-2 py-0.5 text-[0.62rem] md:text-[0.7rem]" style={{ background: tagBg, border: `1px solid ${tagBorder}`, color: tagColor }}>
               {mountain.flavorType}
             </span>
             <div className="flex items-center gap-0.5" aria-label={`知名度 ${mountain.fame} 星`}>

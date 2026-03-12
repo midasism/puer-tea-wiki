@@ -109,7 +109,7 @@ function Card({
       className="rounded-xl p-5 backdrop-blur-sm transition-colors duration-300"
       style={{ background: cardBg, boxShadow: cardShadow, border: `1px solid ${borderColor}` }}
     >
-      <span className="inline-block text-[0.62rem] tracking-[0.2em]" style={{ color: eraColor }}>
+      <span className="inline-block text-[0.62rem] tracking-[0.2em] md:text-[0.7rem]" style={{ color: eraColor }}>
         {event.era} · {event.year}
       </span>
       <h3 className="mt-2 text-[1.1rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.08em", color: titleColor }}>

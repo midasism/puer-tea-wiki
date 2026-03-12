@@ -207,7 +207,7 @@ function MapMarker({
           style={popupBelow ? { top: "-24px", height: "28px" } : { bottom: "-24px", height: "28px" }}
         />
         <Link href={marker.href} className="block">
-          <div className="text-[0.62rem] uppercase tracking-[0.3em] text-[#dbb760]">
+          <div className="text-[0.62rem] uppercase tracking-[0.3em] text-[#dbb760] md:text-[0.7rem]">
             {marker.label}
           </div>
           <div className="mt-2 text-[1.25rem] tracking-wider text-[#f8f0dc]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.08em", lineHeight: 1.3 }}>
@@ -216,8 +216,8 @@ function MapMarker({
           <p className="mt-1.5 text-[0.78rem] font-light leading-relaxed text-[#e0d4bc]/65">
             {marker.desc}
           </p>
-          <span className="mt-3.5 inline-flex items-center gap-1.5 text-[0.72rem] font-medium tracking-wider text-[#dbb760]">
-            进入探索 <span className="text-[0.65rem]">→</span>
+          <span className="mt-3.5 inline-flex items-center gap-1.5 text-[0.72rem] font-medium tracking-wider text-[#dbb760] md:text-[0.78rem]">
+            进入探索 <span className="text-[0.65rem] md:text-[0.72rem]">→</span>
           </span>
         </Link>
       </div>
@@ -251,7 +251,7 @@ export function BentoGrid() {
       {/* Section header */}
       <div className="mb-16 text-center">
         <motion.div
-          className="mb-3 text-[0.7rem] uppercase tracking-[0.4em]"
+          className="mb-3 text-[0.7rem] uppercase tracking-[0.4em] md:text-[0.78rem]"
           style={{ color: eyebrowColor }}
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

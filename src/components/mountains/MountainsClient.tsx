@@ -96,7 +96,7 @@ export function MountainsClient({ mountains }: MountainsClientProps) {
                 <button
                   type="button"
                   onClick={() => setSelected(null)}
-                  className="mb-2 flex items-center gap-1 rounded-sm px-2 py-1 text-[0.7rem] transition-colors"
+                  className="mb-2 flex items-center gap-1 rounded-sm px-2 py-1 text-[0.7rem] transition-colors md:text-[0.78rem]"
                   style={{
                     color: isDark ? "rgba(201,160,82,0.5)" : "#8a7060",
                     background: isDark ? "rgba(201,160,82,0.06)" : "rgba(107,66,38,0.06)",

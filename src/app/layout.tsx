@@ -34,7 +34,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark")}catch(e){}})()`;
+  const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");var d=t==="light"?false:t==="dark"?true:t==="system"?matchMedia("(prefers-color-scheme:dark)").matches:true;if(d)document.documentElement.classList.add("dark")}catch(e){document.documentElement.classList.add("dark")}})()`;
 
   return (
     <html

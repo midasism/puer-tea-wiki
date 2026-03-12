@@ -144,7 +144,7 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
           <button
             type="button"
             onClick={handleResetView}
-            className="rounded-md bg-paper/80 px-2 py-0.5 font-sans text-[10px] text-ink-muted shadow-sm transition-colors hover:bg-paper hover:text-ink dark:bg-paper-dark/80 dark:hover:bg-paper-dark"
+            className="rounded-md bg-paper/80 px-2 py-0.5 font-sans text-[10px] text-ink-muted shadow-sm transition-colors hover:bg-paper hover:text-ink dark:bg-paper-dark/80 dark:hover:bg-paper-dark md:text-xs"
           >
             复位
           </button>

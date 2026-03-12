@@ -39,16 +39,24 @@ export function MountainsHero({ view }: MountainsHeroProps) {
     });
   }, []);
 
-  const [stars] = useState(() =>
-    Array.from({ length: 80 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 70}%`,
-      size: 1 + Math.random() * 1.5,
-      duration: 2 + Math.random() * 3,
-      delay: Math.random() * 5,
-    }))
-  );
+  const [stars, setStars] = useState<{ id: number; left: string; top: string; size: number; duration: number; delay: number }[]>([]);
+
+  useEffect(() => {
+    function seededRandom(seed: number) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+    setStars(
+      Array.from({ length: 80 }, (_, i) => ({
+        id: i,
+        left: `${seededRandom(i * 5 + 1) * 100}%`,
+        top: `${seededRandom(i * 5 + 2) * 70}%`,
+        size: 1 + seededRandom(i * 5 + 3) * 1.5,
+        duration: 2 + seededRandom(i * 5 + 4) * 3,
+        delay: seededRandom(i * 5 + 5) * 5,
+      }))
+    );
+  }, []);
 
   return (
     <section
@@ -127,7 +135,7 @@ export function MountainsHero({ view }: MountainsHeroProps) {
       <div className="relative z-10 flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
         <div
           key={`eyebrow-${view}`}
-          className="mb-5 flex items-center gap-3 text-[0.67rem] tracking-[0.42em] uppercase"
+          className="mb-5 flex items-center gap-3 text-[0.67rem] tracking-[0.42em] uppercase md:text-[0.73rem]"
           style={{ color: "#c9a052", animation: "fadeUp 0.5s ease-out both" }}
         >
           <span className="h-px w-8 bg-[#c9a052]/40" />
@@ -159,7 +167,7 @@ export function MountainsHero({ view }: MountainsHeroProps) {
           className="absolute bottom-8 flex flex-col items-center gap-2"
           style={{ animation: "fadeUp 0.5s ease-out 0.4s both" }}
         >
-          <span className="text-[0.55rem] tracking-[0.25em] uppercase" style={{ color: "rgba(201,160,82,0.3)", fontFamily: "var(--font-mono, monospace)" }}>
+          <span className="text-[0.55rem] tracking-[0.25em] uppercase md:text-[0.65rem]" style={{ color: "rgba(201,160,82,0.3)", fontFamily: "var(--font-mono, monospace)" }}>
             SCROLL TO EXPLORE
           </span>
           <div className="h-6 w-px" style={{ background: "linear-gradient(to bottom, rgba(201,160,82,0.3), transparent)", animation: "scrollPulse 2s ease-in-out infinite" }} />

@@ -1,21 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
 function Stars() {
-  const stars = useMemo(
-    () =>
-      Array.from({ length: 80 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 2 + 0.8,
-        top: Math.random() * 65,
-        left: Math.random() * 100,
-        dur: 2 + Math.random() * 4,
-        delay: Math.random() * 5,
-      })),
-    []
-  );
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="pointer-events-none absolute inset-0" />;
+
+  const stars = Array.from({ length: 80 }, (_, i) => ({
+    id: i,
+    size: seededRandom(i * 3 + 1) * 2 + 0.8,
+    top: seededRandom(i * 3 + 2) * 65,
+    left: seededRandom(i * 3 + 3) * 100,
+    dur: 2 + seededRandom(i * 3 + 4) * 4,
+    delay: seededRandom(i * 3 + 5) * 5,
+  }));
 
   return (
     <div className="pointer-events-none absolute inset-0">
@@ -136,7 +142,7 @@ export function HeroSection() {
 
       <div className="pointer-events-none relative z-20 flex flex-col items-center pb-[18vh] text-center">
         <motion.div
-          className="mb-5 border border-[#c9a052]/30 px-5 py-1.5 text-[0.7rem] uppercase tracking-[0.35em] text-[#c9a052]"
+          className="mb-5 border border-[#c9a052]/30 px-5 py-1.5 text-[0.7rem] uppercase tracking-[0.35em] text-[#c9a052] md:text-[0.78rem]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -173,7 +179,7 @@ export function HeroSection() {
         transition={{ delay: 1.6, duration: 0.9 }}
         aria-label="向下滚动"
       >
-        <span className="text-[0.68rem] uppercase tracking-[0.22em] text-[#c9a052]/50">
+        <span className="text-[0.68rem] uppercase tracking-[0.22em] text-[#c9a052]/50 md:text-[0.75rem]">
           探索
         </span>
         <div

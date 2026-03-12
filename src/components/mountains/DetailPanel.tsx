@@ -65,7 +65,7 @@ export function DetailPanel({ mountain, isDark }: DetailPanelProps) {
           <span className="text-[1.5rem]" style={{ fontFamily: "var(--font-brush, serif)", color: nameColor }}>
             {mountain.name}
           </span>
-          <span className="rounded-sm px-2 py-0.5 text-[0.65rem] tracking-[0.15em]" style={{ border: `1px solid ${cfg.color}44`, color: cfg.color }}>
+          <span className="rounded-sm px-2 py-0.5 text-[0.65rem] tracking-[0.15em] md:text-[0.72rem]" style={{ border: `1px solid ${cfg.color}44`, color: cfg.color }}>
             {mountain.type}
           </span>
         </div>
@@ -74,7 +74,7 @@ export function DetailPanel({ mountain, isDark }: DetailPanelProps) {
         <div className="mb-4 flex flex-wrap gap-4">
           {regionCfg && (
             <div>
-              <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>产区</div>
+              <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>产区</div>
               <div className="flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: regionCfg.color }} />
                 <span className="text-[0.85rem]" style={{ color: metaValueColor }}>{regionCfg.name}</span>
@@ -82,11 +82,11 @@ export function DetailPanel({ mountain, isDark }: DetailPanelProps) {
             </div>
           )}
           <div>
-            <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>子产区</div>
+            <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>子产区</div>
             <div className="text-[0.85rem]" style={{ color: metaValueColor }}>{mountain.sub}</div>
           </div>
           <div>
-            <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>海拔</div>
+            <div className="mb-0.5 text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: metaLabelColor, fontFamily: "var(--font-mono, monospace)" }}>海拔</div>
             <div className="text-[0.85rem]" style={{ color: metaValueColor, fontFamily: "var(--font-mono, monospace)" }}>{mountain.altitude} m</div>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function DetailPanel({ mountain, isDark }: DetailPanelProps) {
 
         {/* Flavor bars */}
         <div className="mb-4">
-          <div className="mb-2 text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: flavorHeaderColor, fontFamily: "var(--font-mono, monospace)" }}>
+          <div className="mb-2 text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: flavorHeaderColor, fontFamily: "var(--font-mono, monospace)" }}>
             FLAVOR PROFILE
           </div>
           <div className="flex flex-col gap-2.5">
@@ -122,7 +122,7 @@ export function DetailPanel({ mountain, isDark }: DetailPanelProps) {
                     }}
                   />
                 </div>
-                <span className="w-7 text-right text-[0.65rem]" style={{ color: cfg.color, fontFamily: "var(--font-mono, monospace)" }}>
+                <span className="w-7 text-right text-[0.65rem] md:text-[0.72rem]" style={{ color: cfg.color, fontFamily: "var(--font-mono, monospace)" }}>
                   {mountain.flavor[i]}
                 </span>
               </div>

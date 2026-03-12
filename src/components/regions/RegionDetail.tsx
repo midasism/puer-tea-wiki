@@ -83,7 +83,7 @@ export function RegionDetail({
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="mb-2 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.2em]" style={{ color: accentColor }}>
+                <div className="mb-2 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.2em] md:text-[0.7rem]" style={{ color: accentColor }}>
                   <span className="h-2 w-2 rounded-full" style={{ background: REGION_DOT[region.id] ?? "#8a7060" }} />
                   茶区
                 </div>
@@ -112,7 +112,7 @@ export function RegionDetail({
                   <div className="inline-flex items-center gap-2 rounded-sm px-3.5 py-2" style={{ border: `1px solid ${chipBorder}`, background: chipBg }}>
                     <MapPin className="h-3.5 w-3.5" style={{ color: accentColor }} />
                     <div>
-                      <div className="text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: `${accentColor}99` }}>海拔</div>
+                      <div className="text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: `${accentColor}99` }}>海拔</div>
                       <div className="text-[0.78rem]" style={{ color: chipValueColor }}>{region.altitude}</div>
                     </div>
                   </div>
@@ -121,7 +121,7 @@ export function RegionDetail({
                   <div className="inline-flex items-center gap-2 rounded-sm px-3.5 py-2" style={{ border: `1px solid ${chipBorder}`, background: chipBg }}>
                     <Thermometer className="h-3.5 w-3.5" style={{ color: accentColor }} />
                     <div>
-                      <div className="text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: `${accentColor}99` }}>气候</div>
+                      <div className="text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: `${accentColor}99` }}>气候</div>
                       <div className="text-[0.78rem] line-clamp-1" style={{ color: chipValueColor }}>{region.climate}</div>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ export function RegionDetail({
                   <div className="inline-flex items-center gap-2 rounded-sm px-3.5 py-2" style={{ border: `1px solid ${chipBorder}`, background: chipBg }}>
                     <Maximize2 className="h-3.5 w-3.5" style={{ color: accentColor }} />
                     <div>
-                      <div className="text-[0.58rem] uppercase tracking-[0.18em]" style={{ color: `${accentColor}99` }}>面积</div>
+                      <div className="text-[0.58rem] uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: `${accentColor}99` }}>面积</div>
                       <div className="text-[0.78rem]" style={{ color: chipValueColor }}>{region.area}</div>
                     </div>
                   </div>
@@ -231,12 +231,12 @@ export function RegionDetail({
                     {r.famousMountains.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-1">
                         {r.famousMountains.slice(0, 4).map((mId) => (
-                          <span key={mId} className="rounded-sm bg-[#c9a052]/8 px-2 py-0.5 text-[0.62rem] text-[#c9a052]/60">
+                          <span key={mId} className="rounded-sm bg-[#c9a052]/8 px-2 py-0.5 text-[0.62rem] text-[#c9a052]/60 md:text-[0.7rem]">
                             {MOUNTAIN_NAMES[mId] ?? mId}
                           </span>
                         ))}
                         {r.famousMountains.length > 4 && (
-                          <span className="rounded-sm bg-[#c9a052]/8 px-2 py-0.5 text-[0.62rem] text-[#c9a052]/60">
+                          <span className="rounded-sm bg-[#c9a052]/8 px-2 py-0.5 text-[0.62rem] text-[#c9a052]/60 md:text-[0.7rem]">
                             +{r.famousMountains.length - 4}
                           </span>
                         )}

@@ -76,7 +76,7 @@ export function StatsSection() {
             <span className="text-5xl leading-none md:text-6xl" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "-0.01em", color: numberColor }}>
               <AnimatedNumber value={stat.value} suffix={stat.suffix} />
             </span>
-            <span className="mt-2 text-[0.73rem] font-light tracking-[0.18em]" style={{ color: labelColor }}>
+            <span className="mt-2 text-[0.73rem] font-light tracking-[0.18em] md:text-[0.8rem]" style={{ color: labelColor }}>
               {stat.label}
             </span>
           </motion.div>
