@@ -151,13 +151,15 @@ export function HeroSection() {
         </motion.div>
 
         <motion.h1
-          className="text-[clamp(2.8rem,6.5vw,5.2rem)] leading-[1.15] tracking-wider text-[#f4ead8]"
+          className="px-4 text-[clamp(2.6rem,6.5vw,5.2rem)] leading-[1.2] tracking-wider text-[#f4ead8]"
           style={{ fontFamily: "var(--font-brush), serif", textShadow: "0 2px 40px rgba(0,0,0,0.6)", letterSpacing: "0.06em" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.65 }}
         >
-          一片叶子的<span className="text-[#e8c97a]">千年旅程</span>
+          <span className="whitespace-nowrap">一片叶子的</span>
+          <br className="sm:hidden" />
+          <span className="whitespace-nowrap text-[#e8c97a]">千年旅程</span>
         </motion.h1>
 
         <motion.p

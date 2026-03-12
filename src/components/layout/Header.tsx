@@ -67,10 +67,9 @@ export default function Header() {
   return (
     <>
       <header
-        className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between transition-all duration-500"
+        className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 transition-all duration-500 md:px-12"
         style={{
           height: 64,
-          padding: "0 48px",
           background: navBg,
           backdropFilter: (heroMode || heroPageDarkNav) ? undefined : "blur(16px)",
           borderBottom: borderColor,

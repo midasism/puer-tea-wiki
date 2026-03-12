@@ -278,7 +278,7 @@ export function BentoGrid() {
       </div>
 
       {/* Map area */}
-      <div className="relative mx-auto aspect-[16/8] w-full max-w-[1100px]">
+      <div className="relative mx-auto aspect-[16/8] w-full max-w-[1100px] overflow-hidden">
         <TerrainSVG />
         <div
           className="pointer-events-none absolute inset-0 z-[1]"
