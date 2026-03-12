@@ -19,19 +19,19 @@ const TEA_REGION_COLORS: Record<string, { fill: string; hover: string; stroke: s
     stroke: "#15803d",
   },
   lincang: {
-    fill: "rgba(180, 120, 20, 0.50)",
-    hover: "rgba(180, 120, 20, 0.70)",
-    stroke: "#a16207",
+    fill: "rgba(196, 140, 20, 0.60)",
+    hover: "rgba(210, 155, 25, 0.78)",
+    stroke: "#b8860b",
   },
   puer: {
-    fill: "rgba(190, 50, 30, 0.45)",
-    hover: "rgba(190, 50, 30, 0.65)",
-    stroke: "#b91c1c",
+    fill: "rgba(200, 60, 35, 0.55)",
+    hover: "rgba(215, 75, 40, 0.72)",
+    stroke: "#c0392b",
   },
   baoshan: {
-    fill: "rgba(37, 99, 165, 0.45)",
-    hover: "rgba(37, 99, 165, 0.65)",
-    stroke: "#1d4ed8",
+    fill: "rgba(50, 115, 190, 0.55)",
+    hover: "rgba(60, 130, 210, 0.72)",
+    stroke: "#2563eb",
   },
 };
 
@@ -45,10 +45,10 @@ const DEFAULT_CENTER: [number, number] = [100.5, 24.2];
 const DEFAULT_ZOOM = 1;
 
 const TEA_REGION_VIEWPORTS: Record<string, RegionViewport> = {
-  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75], zoom: 1.7 },
-  lincang: { name: "临沧", coordinates: [99.9, 23.88], zoom: 1.8 },
-  puer: { name: "普洱", coordinates: [100.95, 23.05], zoom: 1.5 },
-  baoshan: { name: "保山", coordinates: [99.15, 25.1], zoom: 1.8 },
+  xishuangbanna: { name: "西双版纳", coordinates: [100.8, 21.75], zoom: 1.15 },
+  lincang: { name: "临沧", coordinates: [99.9, 23.88], zoom: 1.15 },
+  puer: { name: "普洱", coordinates: [100.95, 23.05], zoom: 1.1 },
+  baoshan: { name: "保山", coordinates: [99.15, 25.1], zoom: 1.15 },
 };
 
 const TRANSLATE_EXTENT: [[number, number], [number, number]] = [
@@ -76,10 +76,16 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
   const [mapZoom, setMapZoom] = useState(DEFAULT_ZOOM);
 
   const prevSelectedRef = useRef<string | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const animatingTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     if (selectedRegionId === prevSelectedRef.current) return;
     prevSelectedRef.current = selectedRegionId;
+
+    setIsAnimating(true);
+    clearTimeout(animatingTimerRef.current);
+    animatingTimerRef.current = setTimeout(() => setIsAnimating(false), 1400);
 
     if (selectedRegionId && TEA_REGION_VIEWPORTS[selectedRegionId]) {
       const vp = TEA_REGION_VIEWPORTS[selectedRegionId];
@@ -89,6 +95,8 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
       setMapCenter(DEFAULT_CENTER);
       setMapZoom(DEFAULT_ZOOM);
     }
+
+    return () => clearTimeout(animatingTimerRef.current);
   }, [selectedRegionId]);
 
   const handleMoveEnd = useCallback(
@@ -236,6 +244,8 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
           maxZoom={4}
           translateExtent={TRANSLATE_EXTENT}
           onMoveEnd={handleMoveEnd}
+          onMoveStart={() => setIsAnimating(false)}
+          className={isAnimating ? "map-smooth-transition" : ""}
         >
           <Geographies geography={GEO_URL}>
             {({ geographies }) => (

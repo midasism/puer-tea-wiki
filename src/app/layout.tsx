@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif_SC, Noto_Sans_SC } from "next/font/google";
+import { Noto_Serif_SC, Noto_Sans_SC, Ma_Shan_Zheng } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -17,6 +17,12 @@ const notoSansSC = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
 });
 
+const maShanZheng = Ma_Shan_Zheng({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-ma-shan-zheng",
+});
+
 export const metadata: Metadata = {
   title: "普洱茶志 | 云南普洱茶科普百科",
   description:
@@ -28,16 +34,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeInitScript = `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark")}catch(e){}})()`;
+
   return (
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${notoSerifSC.variable} ${notoSansSC.variable}`}
+      className={`${notoSerifSC.variable} ${notoSansSC.variable} ${maShanZheng.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="paper-texture min-h-screen font-sans antialiased">
         <ThemeProvider>
           <Header />
-          <main className="flex-1 pt-16">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

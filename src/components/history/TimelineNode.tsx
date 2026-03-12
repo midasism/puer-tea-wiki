@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useTheme } from "@/components/layout/ThemeProvider";
 
 export interface HistoryEvent {
   id: string;
@@ -25,7 +26,6 @@ export function TimelineNode({ event, index }: TimelineNodeProps) {
 
   return (
     <div className="relative flex items-stretch py-8 md:py-10">
-      {/* Left half - content for even index (desktop) */}
       <div className="hidden w-1/2 pr-8 md:block">
         {isLeft && (
           <motion.div
@@ -40,20 +40,18 @@ export function TimelineNode({ event, index }: TimelineNodeProps) {
         )}
       </div>
 
-      {/* Center - dot (connects to vertical line) */}
       <div className="absolute left-4 top-1/2 flex w-8 -translate-y-1/2 justify-center md:left-1/2 md:-translate-x-1/2 md:translate-y-0">
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          className="relative z-10 h-4 w-4 rounded-full border-2 border-tea-green bg-paper dark:border-tea-green-light dark:bg-paper-dark"
+          className="relative z-10 h-4 w-4 rounded-full border-2 border-[#c9a052]"
+          style={{ background: "radial-gradient(circle, #e8c97a 0%, #c9a052 100%)", boxShadow: "0 0 12px rgba(201,160,82,0.4)" }}
         />
       </div>
 
-      {/* Right half - content for odd index (desktop), or all content (mobile) */}
       <div className="ml-12 min-w-0 flex-1 md:ml-0 md:w-1/2 md:pl-8">
-        {/* Mobile: always show card on right of line */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +61,6 @@ export function TimelineNode({ event, index }: TimelineNodeProps) {
         >
           <Card event={event} expanded={expanded} setExpanded={setExpanded} />
         </motion.div>
-        {/* Desktop odd (right): card on right */}
         {!isLeft && (
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -89,20 +86,44 @@ function Card({
   expanded: boolean;
   setExpanded: (v: boolean) => void;
 }) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
+  const cardBg = isDark
+    ? "linear-gradient(145deg, rgba(42,35,22,0.85) 0%, rgba(32,28,18,0.9) 100%)"
+    : "linear-gradient(145deg, #ffffff 0%, #faf5ec 100%)";
+  const cardShadow = isDark
+    ? "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(244,234,216,0.04)"
+    : "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)";
+  const borderColor = isDark ? "rgba(201,160,82,0.15)" : "rgba(107,66,38,0.12)";
+  const eraColor = isDark ? "#c9a052" : "#6b4226";
+  const titleColor = isDark ? "#f4ead8" : "#1c1510";
+  const summaryColor = isDark ? "rgba(224,212,188,0.55)" : "#4a3828";
+  const btnColor = isDark ? "#dbb760" : "#6b4226";
+  const btnHover = isDark ? "#e8c97a" : "#c9a052";
+  const detailColor = isDark ? "rgba(224,212,188,0.65)" : "#4a3828";
+  const dotBg = isDark ? "#c9a052" : "#c9a052";
+
   return (
-    <div className="rounded-xl border border-ink-muted/15 bg-paper p-5 dark:border-ink-muted/20 dark:bg-paper-dark">
-      <span className="inline-block rounded-full bg-tea-green px-3 py-1 font-sans text-xs text-white dark:bg-tea-green-light">
+    <div
+      className="rounded-xl p-5 backdrop-blur-sm transition-colors duration-300"
+      style={{ background: cardBg, boxShadow: cardShadow, border: `1px solid ${borderColor}` }}
+    >
+      <span className="inline-block text-[0.62rem] tracking-[0.2em]" style={{ color: eraColor }}>
         {event.era} · {event.year}
       </span>
-      <h3 className="mt-2 font-serif text-lg font-medium text-ink dark:text-foreground">
+      <h3 className="mt-2 text-[1.1rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.08em", color: titleColor }}>
         {event.title}
       </h3>
-      <p className="mt-2 font-sans text-sm text-ink-muted">{event.summary}</p>
+      <p className="mt-2 font-sans text-sm" style={{ color: summaryColor }}>{event.summary}</p>
 
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="mt-4 flex items-center gap-1.5 font-sans text-sm text-tea-green transition-colors hover:text-tea-green-dark dark:text-tea-green-light dark:hover:text-tea-green"
+        className="mt-4 flex items-center gap-1.5 font-sans text-sm transition-colors"
+        style={{ color: btnColor }}
+        onMouseEnter={(e) => { e.currentTarget.style.color = btnHover; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = btnColor; }}
         aria-expanded={expanded}
       >
         {expanded ? "收起" : "了解更多"}
@@ -121,18 +142,15 @@ function Card({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="mt-4 space-y-4 border-t border-ink-muted/15 pt-4 dark:border-ink-muted/20">
-              <p className="font-sans text-sm leading-relaxed text-ink-light dark:text-ink-light">
+            <div className="mt-4 space-y-4 border-t pt-4" style={{ borderColor }}>
+              <p className="font-sans text-sm leading-relaxed" style={{ color: detailColor }}>
                 {event.detail}
               </p>
               {event.highlights.length > 0 && (
                 <ul className="space-y-2">
                   {event.highlights.map((h, i) => (
-                    <li
-                      key={i}
-                      className="flex gap-2 font-sans text-sm text-ink-light dark:text-ink-light"
-                    >
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-tea-green dark:bg-amber" />
+                    <li key={i} className="flex gap-2 font-sans text-sm" style={{ color: detailColor }}>
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dotBg }} />
                       {h}
                     </li>
                   ))}
