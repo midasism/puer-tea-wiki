@@ -87,7 +87,7 @@ export function RegionDetail({
                   <span className="h-2 w-2 rounded-full" style={{ background: REGION_DOT[region.id] ?? "#8a7060" }} />
                   茶区
                 </div>
-                <h2 className="text-[1.8rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.06em", color: titleColor }}>
+                <h2 className="text-[2rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.06em", color: titleColor }}>
                   {region.name}
                 </h2>
               </div>
@@ -102,7 +102,7 @@ export function RegionDetail({
               </button>
             </div>
 
-            <p className="text-[0.82rem] leading-relaxed" style={{ fontFamily: "var(--font-serif), serif", lineHeight: 1.7, color: bodyColor }}>
+            <p className="text-[0.92rem] leading-relaxed" style={{ fontFamily: "var(--font-serif), serif", lineHeight: 1.7, color: bodyColor }}>
               {region.description}
             </p>
 
@@ -201,10 +201,10 @@ export function RegionDetail({
             className="space-y-5"
           >
             <div>
-              <h2 className="text-[1.6rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.06em", color: titleColor }}>
+              <h2 className="text-[1.8rem]" style={{ fontFamily: "var(--font-brush), serif", letterSpacing: "0.06em", color: titleColor }}>
                 四大产区总览
               </h2>
-              <p className="mt-2 text-[0.82rem]" style={{ color: mutedColor }}>
+              <p className="mt-2 text-[0.92rem]" style={{ color: mutedColor }}>
                 云南普洱茶主要分布在四大产区，各具风土特色。点击地图或下方卡片查看详情。
               </p>
             </div>
@@ -220,12 +220,12 @@ export function RegionDetail({
                   <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: REGION_DOT[r.id] ?? "#8a7060" }} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-[0.92rem]" style={{ fontFamily: "var(--font-brush), serif", color: titleColor }}>
+                      <span className="text-[1.05rem]" style={{ fontFamily: "var(--font-brush), serif", color: titleColor }}>
                         {r.name}
                       </span>
                       <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" style={{ color: `${accentColor}50` }} />
                     </div>
-                    <p className="mt-1 text-[0.72rem] leading-relaxed line-clamp-2" style={{ color: mutedColor }}>
+                    <p className="mt-1 text-[0.82rem] leading-relaxed line-clamp-2" style={{ color: mutedColor }}>
                       {r.description}
                     </p>
                     {r.famousMountains.length > 0 && (

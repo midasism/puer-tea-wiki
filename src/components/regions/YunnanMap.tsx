@@ -338,7 +338,7 @@ export function YunnanMap({ selectedRegionId, onSelectRegion }: YunnanMapProps) 
                   dominantBaseline="middle"
                   style={{
                     fontFamily: "var(--font-noto-serif-sc), serif",
-                    fontSize: isActive ? 11 : 9,
+                    fontSize: isActive ? 14 : 12,
                     fontWeight: isActive ? 600 : 500,
                     fill: isActive
                       ? TEA_REGION_COLORS[id].stroke
