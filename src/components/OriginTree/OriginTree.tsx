@@ -8,13 +8,12 @@ import { originTreeData } from './data';
 import type { GeoType, OriginNode } from './types';
 import styles from './OriginTree.module.css';
 
-interface D3Node extends d3.HierarchyNode<OriginNode> {
-  id: number;
+type D3Node = d3.HierarchyNode<OriginNode> & {
   x0?: number;
   y0?: number;
   _children?: D3Node[] | null;
-  children: D3Node[] | null;
-}
+  children?: D3Node[];
+};
 
 interface OriginTreeProps {
   onLeafClick?: (name: string, type: GeoType) => void;
@@ -75,12 +74,12 @@ function verticalLinkPath(s: { x: number; y: number }, t: { x: number; y: number
 }
 
 function collapseAll(d: D3Node) {
-  if (d.children) { d._children = d.children; d.children = null; }
+  if (d.children) { d._children = d.children; d.children = undefined; }
   if (d._children) d._children.forEach(collapseAll);
 }
 
 function expandAll(d: D3Node) {
-  if (d._children) { d.children = d._children; d._children = null; }
+  if (d._children) { d.children = d._children; d._children = undefined; }
   if (d.children) d.children.forEach(expandAll);
 }
 
@@ -88,7 +87,7 @@ function expandToDepth(d: D3Node, depth: number) {
   collapseAll(d);
   function go(node: D3Node, cur: number) {
     if (cur < depth) {
-      if (node._children) { node.children = node._children; node._children = null; }
+      if (node._children) { node.children = node._children; node._children = undefined; }
       if (node.children) node.children.forEach(c => go(c, cur + 1));
     }
   }
@@ -256,10 +255,10 @@ export function OriginTree({ onLeafClick, initialDepth = 2, height, isDark = tru
     const root = d3.hierarchy(originTreeData) as D3Node;
 
     root.each((d: D3Node) => {
-      d.id = ++nodeId;
+      (d as { id?: string }).id = String(++nodeId);
       if (d.data.init === false && d.children) {
         d._children = d.children;
-        d.children = null;
+        d.children = undefined;
       }
     });
 
@@ -358,7 +357,7 @@ export function OriginTree({ onLeafClick, initialDepth = 2, height, isDark = tru
       ]);
 
       const link = g.selectAll<SVGPathElement, D3Node>('path.link')
-        .data(links, (d: D3Node) => d.id);
+        .data(links, (d: D3Node) => d.id ?? '');
 
       const srcPt = src as unknown as HierarchyPointNode<OriginNode>;
       const srcPos = { x: src.x0 ?? srcPt.x, y: src.y0 ?? srcPt.y };
@@ -395,7 +394,7 @@ export function OriginTree({ onLeafClick, initialDepth = 2, height, isDark = tru
         .remove();
 
       const node = g.selectAll<SVGGElement, D3Node>('g.node')
-        .data(nodes, (d: D3Node) => d.id);
+        .data(nodes, (d: D3Node) => d.id ?? '');
 
       const nodeEnter = node.enter()
         .append('g')
@@ -408,8 +407,8 @@ export function OriginTree({ onLeafClick, initialDepth = 2, height, isDark = tru
             onLeafClickRef.current(d.data.name, d.data.type as GeoType);
             return;
           }
-          if (d.children) { d._children = d.children; d.children = null; }
-          else if (d._children) { d.children = d._children; d._children = null; }
+          if (d.children) { d._children = d.children; d.children = undefined; }
+          else if (d._children) { d.children = d._children; d._children = undefined; }
           else return;
           update(d);
         })

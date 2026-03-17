@@ -13,6 +13,7 @@ const MOUNTAIN_LAYERS = [
 const VIEW_TEXT: Record<ViewType, { eyebrow: string; title: string; highlight: string }> = {
   A: { eyebrow: "MOUNTAIN FLAVOR ATLAS", title: "山头", highlight: "星云" },
   B: { eyebrow: "MOUNTAIN ALTITUDE PROFILE", title: "百", highlight: "山剖面" },
+  Tree: { eyebrow: "ORIGIN TREE EXPLORER", title: "产地", highlight: "溯源" },
 };
 
 interface MountainsHeroProps {
