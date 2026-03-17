@@ -59,7 +59,10 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
             type="button"
             onClick={() => onViewChange("B")}
             className="flex items-center gap-2 px-5 py-2.5 transition-colors"
-            style={{ background: view === "B" ? tabActiveBg : "transparent" }}
+            style={{
+              background: view === "B" ? tabActiveBg : "transparent",
+              borderRight: `1px solid ${tabBorder}`,
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M0,12 C2,8 4,10 6,6 C8,2 10,5 14,4" stroke="#7ae898" strokeWidth="1.5" fill="none" />
@@ -70,6 +73,26 @@ export function Switcher({ view, onViewChange, filters, onFilterToggle, count, i
               style={{ fontFamily: "var(--font-mono, monospace)", color: view === "B" ? tabActiveText : tabInactiveText }}
             >
               山峦剖面
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onViewChange("Tree")}
+            className="flex items-center gap-2 px-5 py-2.5 transition-colors"
+            style={{ background: view === "Tree" ? tabActiveBg : "transparent" }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="3" r="2.5" fill={isDark ? "#c9a052" : "#8b6914"} opacity=".9" />
+              <line x1="7" y1="5.5" x2="4" y2="9" stroke={isDark ? "rgba(201,160,82,.4)" : "rgba(107,66,38,.4)"} strokeWidth="1" />
+              <line x1="7" y1="5.5" x2="10" y2="9" stroke={isDark ? "rgba(201,160,82,.4)" : "rgba(107,66,38,.4)"} strokeWidth="1" />
+              <circle cx="4" cy="10" r="1.8" fill={isDark ? "#2d5030" : "#4a7a2e"} opacity=".8" />
+              <circle cx="10" cy="10" r="1.8" fill={isDark ? "#7a4a1a" : "#8b6914"} opacity=".8" />
+            </svg>
+            <span
+              className="text-[0.72rem] tracking-[0.1em] md:text-[0.78rem]"
+              style={{ fontFamily: "var(--font-mono, monospace)", color: view === "Tree" ? tabActiveText : tabInactiveText }}
+            >
+              产地体系
             </span>
           </button>
         </div>

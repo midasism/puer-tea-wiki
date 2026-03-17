@@ -1,7 +1,7 @@
 import type { Mountain } from "@/lib/mountains";
 
 export type FlavorType = "霸气型" | "甜韵型" | "柔和型" | "花香型" | "均衡型";
-export type ViewType = "A" | "B";
+export type ViewType = "A" | "B" | "Tree";
 export type RegionId = "xishuangbanna" | "lincang" | "puer" | "baoshan";
 
 export interface TypeConfig {

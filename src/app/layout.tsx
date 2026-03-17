@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif_SC, Noto_Sans_SC, Ma_Shan_Zheng } from "next/font/google";
+import { Noto_Serif_SC, Noto_Sans_SC, Ma_Shan_Zheng, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -23,6 +23,12 @@ const maShanZheng = Ma_Shan_Zheng({
   variable: "--font-ma-shan-zheng",
 });
 
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+});
+
 export const metadata: Metadata = {
   title: "普洱茶志 | 云南普洱茶科普百科",
   description:
@@ -40,7 +46,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${notoSerifSC.variable} ${notoSansSC.variable} ${maShanZheng.variable}`}
+      className={`${notoSerifSC.variable} ${notoSansSC.variable} ${maShanZheng.variable} ${jetBrainsMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
